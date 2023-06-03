@@ -1,0 +1,6 @@
+10,first,first,30.00,60.00,90.00,Excellent
+20,Second,Second,30.00,45.00,75.00,Good
+99,הה,הה,25.00,50.00,75.00,Good
+11,KK,KKK,30.00,58.00,88.00,Very Good
+2000,kk,jj,30.00,50.00,80.00,Very Good
+5,last,last,30.00,50.00,80.00,Very Good

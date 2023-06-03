@@ -4,13 +4,40 @@ import java.util.List;
 
 import actions.DeleteStudentAction;
 import actions.StudentCreatedAction;
+import datasource.FileBasedSource;
 import models.Student;
 import structures.BinarySearchTree;
 import structures.LinkedList;
 
 public class StudentsRepo {
+    final FileBasedSource<Student> source = new FileBasedSource<Student>("students.txt") {
+        @Override
+        public Student fromLine(String line) {
+            Student student = new Student();
+            student.fromLine(line);
+            return student;
+        }
+    };
+
+
+    public StudentsRepo() {
+        list = source.read();
+
+        list.toList().forEach((student) -> {
+            tree.insert(student);
+        });
+        
+        addStudentCreatedAction((student) -> {
+            source.write(this.list);
+        });
+
+        addDeleteStudentAction(() -> {
+            source.write(this.list);
+        });
+    }
+
     final BinarySearchTree<Student> tree = new BinarySearchTree<>();
-    final LinkedList<Student> list = new LinkedList<>();
+    final LinkedList<Student> list;
 
     final List<StudentCreatedAction> studentCreatedActions = new java.util.LinkedList<>();
     final List<DeleteStudentAction> deleteStudentActions = new java.util.LinkedList<>();
@@ -112,6 +139,20 @@ public class StudentsRepo {
                 return 0;
             }
         });
+        return sorted;
+    }
+
+    public List<Student> bubbleSorted() {
+        List<Student> sorted = list.toList();
+        for (int i = 0; i < sorted.size(); i++) {
+            for (int j = 0; j < sorted.size() - i - 1; j++) {
+                if (sorted.get(j).total < sorted.get(j + 1).total) {
+                    Student temp = sorted.get(j);
+                    sorted.set(j, sorted.get(j + 1));
+                    sorted.set(j + 1, temp);
+                }
+            }
+        }
         return sorted;
     }
 

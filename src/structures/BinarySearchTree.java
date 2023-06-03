@@ -73,6 +73,14 @@ public class BinarySearchTree<T extends Model> {
                 inorderTraversal(node.right);
 
         }
+
+        // describe behaviour of inorder traversal
+        // left -> root -> right
+        // 1. check if root is null
+        // 2. if not null, traverse left subtree
+        // 3. print root
+        // 4. traverse right subtree
+        // 5. end
     }
 
     public List<T> inorderTraversal() {
@@ -104,6 +112,13 @@ public class BinarySearchTree<T extends Model> {
                 preorderTraversal(node.right);
 
         }
+        // describe behaviour of preorder traversal
+        // root -> left -> right
+        // 1. check if root is null
+        // 2. if not null, print root
+        // 3. traverse left subtree
+        // 4. traverse right subtree
+        // 5. end 
     }
 
     public List<T> preorderTraversal() {
@@ -142,6 +157,14 @@ public class BinarySearchTree<T extends Model> {
         List<T> list = new ArrayList<>();
         postorderTraversal(root, list);
         return list;
+
+        // describe behaviour of postorder traversal
+        // left -> right -> root
+        // 1. check if root is null
+        // 2. if not null, traverse left subtree
+        // 3. traverse right subtree
+        // 4. print root
+        // 5. end
     }
 
     private void postorderTraversal(Node<T> node, List<T> list) {
